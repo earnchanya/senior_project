@@ -1,92 +1,55 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
-import { ImagePiece1, TextBox, Text, ThreadContainer, ThreadBox } from '../assets/css/TrendingStyled'
-import Sea1 from '../assets/photo/sea6424.jpg'
-import Sea2 from '../assets/photo/sea6642.jpg'
-import Sea3 from '../assets/photo/sea6669.jpg'
-
-// class TrendingItems extends Component {
-//      render() {
-//           return (
-//                <ThreadContainer>
-//                <ThreadBox>
-//                     <Link target={"_blank"} to="//pantip.com/topic/38834361" style={{ textDecoration: 'none' }}>
-//                          <ImagePiece1 src={Sea1}/>
-//                          <TextBox>
-//                               <Text>[CR] Bali & Nusa Penida Island ทริปสุดคูลต้องไปสักครั้งที่บาหลีและเกาะนูซาเพนิดา</Text>
-//                          </TextBox>
-//                     </Link>
-//                </ThreadBox>
-//                <ThreadBox>
-//                     <Link target={"_blank"} to="//pantip.com/topic/38838801" style={{ textDecoration: 'none' }}>
-//                          <ImagePiece1 src={Sea2}/>
-//                          <TextBox>
-//                               <Text>[SR] Merit Resort Samui ที่พักเกาะสมุย ท่ามกลางวิวหลักล้าน</Text>
-//                          </TextBox>
-//                     </Link>
-//                </ThreadBox>
-//                <ThreadBox>
-//                     <Link target={"_blank"} to="//pantip.com/topic/38838801" style={{ textDecoration: 'none' }}>
-//                          <ImagePiece1 src={Sea3}/>
-//                          <TextBox>
-//                               <Text>[CR] "ไปเที่ยว ภูเก็ต-สิมิลัน 3 วัน 2 คืน กันเถอะ Go Go Go"</Text>
-//                          </TextBox>
-//                     </Link>
-//                </ThreadBox>
-//                </ThreadContainer>
-//           )
-//      }
-// }
-
-// export default TrendingItems;
-// import Server from '../backend/Server'
+import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom';
+import {  ThreadContainer } from '../assets/css/TrendingStyled'
 import {
      Card,
-     CardGroup,
-     CardImg,
-     CardBlock,
+     // CardGroup,
+     // CardImg,
+     // CardBlock,
      CardTitle,
-     CardSubtitle,
-     CardText,
+     // CardSubtitle,
+     // CardText,
      Button,
    } from '../../node_modules/@bootstrap-styled/v4';
+// import Sea1 from '../assets/photo/sea6424.jpg'
+import axios from 'axios'
+
+const DEFAULT_SEARCH = '?filters=0'
 
 function TrendingItems () {
      const height = '310px';
      const width = '500px';
+     const {search} = useLocation()
+     const [threads, setThread] = useState([])
+
+     useEffect(() => {
+          const basePath = "http://localhost:8080"
+          const path = `${basePath}${search ||DEFAULT_SEARCH}`
+
+          axios
+          .get(path)
+          .then((res) => {
+               if(!res.data?.threads) 
+                    return
+               
+               setThread(res.data.threads)
+               console.log(res.data)
+          });
+     }, [search]);
+
      return (
           <ThreadContainer>
-          {/* <ThreadContainer ref={this.myRef}> */}
-               <Card>
-                    <CardImg height='310px' width='500px' src={Sea1} alt="Card image cap" />
-                    <CardTitle>Card title</CardTitle>
-                    <CardText>This is a wider card with supporting text below as a it longesdlncnjsndljcnsldnbcljsnbcljsndnlcnslncksdnclr.</CardText>
-                    <Button>Button</Button>
-               </Card>
-               <Card>
-                    <CardImg height='310px' width='500px' src={Sea2} alt="Card image cap" />
-                    <CardTitle>Card title</CardTitle>
-                    <CardText>This card has supporting text below as a .</CardText>
-                    <Button>Button</Button>
-               </Card>
-               <Card>
-                    <CardImg height='310px' width='500px' src={Sea3} alt="Card image cap" />
-                    <CardTitle>Card title</CardTitle>
-                    <CardText>This is a wider card with supporting text belontent than t.</CardText>
-                    <Button>Button</Button>
-               </Card>
-               <Card>
-                    <CardImg height='310px' width='500px' src={Sea3} alt="Card image cap" />
-                    <CardTitle>Card title</CardTitle>
-                    <CardText>This is a wider card with supporting text belontent than t.</CardText>
-                    <Button>Button</Button>
-               </Card>
-               <Card>
-                    <CardImg height='310px' width='500px' src={Sea3} alt="Card image cap" />
-                    <CardTitle>Card title</CardTitle>
-                    <CardText>This is a wider card with supporting text belontent than t.</CardText>
-                    <Button>Button</Button>
-               </Card>
+               {(threads).map(thread => 
+                    <Card>
+                         {/* <img height={height} width={width} src={window.location.origin +'image_backend/forest01.jpg'} alt="Card image cap" /> */}
+                         <img height={height} width={width} src="https://f.ptcdn.info/060/067/000/q1m3bm383BbYpZn4Y7W-o.png" alt="Card image cap" />
+                         <CardTitle>{thread.title}</CardTitle>
+                         {console.log(thread.images_path[0])}
+                         <a target="_blank" href={thread.permalink}>
+                              <Button>Click</Button>
+                         </a>
+                    </Card>
+               )}
           </ThreadContainer>
      )
 }
