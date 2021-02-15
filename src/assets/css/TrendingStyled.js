@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 const TrendingBox = styled.div`
-     margin-top: 5vh;
+     ${'' /* margin-top: 5vh; */}
+     ${'' /* position: relative; */}
 `
 
 const TitleBox = styled.div`
@@ -39,76 +40,4 @@ const ThemeButton = styled.button`
      border-radius: 20px;
 `
 
-const ImagePiece1 = styled.img`
-     display: block;
-     opacity: 1;
-     transition: .5s ease;
-     backface-visibility: hidden;
-     height: 310px;
-     width: 500px;
-`
-
-const TextBox = styled.div`
-     transition: .3s ease;
-     opacity: 0;
-     position: relative;
-     ${'' /* position: absolute; */}
-     left: 50%; 
-     transform: translate(-50%, -50%);
-     -ms-transform: translate(-50%, -50%);
-     text-align: center;
-     margin-bottom: 5px;
-`
-
-const Text = styled.div`
-     background-color: none;
-     color: black;
-     font-family: 'Kanit', sans-serif;
-     font-size: 20px;
-     ${'' /* top: 50%; */}
-     ${'' /* padding: 16px 32px; */}
-}
-`
-
-const ThreadContainer = styled.div`
-     ${'' /* background-color: #0E1318; */}
-     width: 100vw;
-     height: 300px;
-     overflow-x: scroll;
-     ${'' /* overflow-x: auto; */}
-
-     display: grid;
-     grid-template-columns: repeat(6, auto);
-     grid-gap: 0 50px;
-
-     padding: 30px 60px;
-     padding-right: 0;  
-     border-radius: 10px;
-
-     margin-top: 2vh;
-     margin-left: 2vw;
-`
-
-const ThreadBox = styled.div`
-     padding: 0 7px;
-     ${'' /* height: 300px;
-     width: 500px; */}
-     display: inline-block;
-     ${'' /* width: 100%;
-     position: relative;
-     object-fit: cover; */}
-     &:hover {
-          ${ImagePiece1} {
-                    cursor: pointer;
-                    opacity: 0.3;
-          }
-          ${TextBox} {
-                    cursor: pointer;
-                    opacity: 1;  
-          }
-     }
-`
-
-export { TrendingBox, TitleBox, TrendIcon, TrendTitle, ButtonBox, FilterIcon, ThemeButton, 
-     ImagePiece1, TextBox, Text,
-     ThreadContainer, ThreadBox };
+export { TrendingBox, TitleBox, TrendIcon, TrendTitle, ButtonBox, FilterIcon, ThemeButton}

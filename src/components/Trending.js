@@ -21,7 +21,6 @@ function Trending() {
           // console.log('click')
           parseQuery({ params: { filters }, targetUrl: '/' })
           setData({ arr: tmp })
-
      }
      
      // console.log('filters')

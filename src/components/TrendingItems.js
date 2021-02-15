@@ -1,30 +1,55 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom';
-import {  ThreadContainer } from '../assets/css/TrendingStyled'
-import {
-     Card,
-     // CardGroup,
-     // CardImg,
-     // CardBlock,
-     CardTitle,
-     // CardSubtitle,
-     // CardText,
-     Button,
-   } from '../../node_modules/@bootstrap-styled/v4';
-// import Sea1 from '../assets/photo/sea6424.jpg'
 import axios from 'axios'
+import { useLocation } from 'react-router-dom'
+import { Box, Grid, Card, CardActionArea, CardActions, 
+         CardContent, Button, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import SwipeableViews from 'react-swipeable-views'
 
 const DEFAULT_SEARCH = '?filters=0'
+const useStyles = makeStyles({
+     box: {
+          marginTop: '20px',
+     },
+     gridContainer: {
+          overflowX: "scroll",
+     },
+     cardContent: {
+          height: "100px",
+          display: 'flex',
+          alignItems: 'center',
+     },
+     root: {
+          width: '400px',
+     },
+     media: {
+          height: '210px',
+          
+          display: 'block',
+          maxWidth: 400,
+          overflow: 'hidden',
+          width: '100%',
+     },
+     buttonText: {
+          fontSize: '20px',
+     },
+     button: {
+          marginInline: 'auto',
+     },
+     imageContainer: {
+          maxWidth: '400px',
+          flexGrow: 1,
+     },
+})
 
 function TrendingItems () {
-     const height = '310px';
-     const width = '500px';
      const {search} = useLocation()
      const [threads, setThread] = useState([])
+     const classes = useStyles()
 
      useEffect(() => {
           const basePath = "http://localhost:8080"
-          const path = `${basePath}${search ||DEFAULT_SEARCH}`
+          const path = `${ basePath }${ search || DEFAULT_SEARCH }`
 
           axios
           .get(path)
@@ -33,24 +58,55 @@ function TrendingItems () {
                     return
                
                setThread(res.data.threads)
-               console.log(res.data)
+               // console.log(res.data.threads)
+               // console.log(res.data)
           });
      }, [search]);
 
      return (
-          <ThreadContainer>
-               {(threads).map(thread => 
-                    <Card>
-                         {/* <img height={height} width={width} src={window.location.origin +'image_backend/forest01.jpg'} alt="Card image cap" /> */}
-                         <img height={height} width={width} src="https://f.ptcdn.info/060/067/000/q1m3bm383BbYpZn4Y7W-o.png" alt="Card image cap" />
-                         <CardTitle>{thread.title}</CardTitle>
-                         {console.log(thread.images_path[0])}
-                         <a target="_blank" href={thread.permalink}>
-                              <Button>Click</Button>
-                         </a>
-                    </Card>
-               )}
-          </ThreadContainer>
+          <Box className={classes.box} paddingX={3}>
+               <Grid className={classes.gridContainer} container spacing={3} wrap="nowrap">
+                    {(threads).map((thread) => 
+                         <Grid item>
+                              <Card className={classes.root}>
+                                   <CardActionArea>
+                                        <CardContent className={classes.cardContent}>
+                                             <Typography gutterBottom variant="h5" component="h2">
+                                                  {thread.title}
+                                             </Typography>
+                                        </CardContent>
+                                        {/* <div className={classes.imageContainer}>
+                                             <img
+                                                  className={classes.media}
+                                                  src={thread.images[0]}
+                                                  alt="card=props"
+                                             />
+                                        </div> */}
+                                        <SwipeableViews enableMouseEvents>
+                                             { thread.images.map((image, index) => {
+                                                  return (
+                                                       <img
+                                                            className={classes.media}
+                                                            key={index}
+                                                            src={image}
+                                                            alt="card-props"
+                                                       />
+                                                  )
+                                             })}
+                                        </SwipeableViews>
+                                   </CardActionArea>
+                                   <CardActions>
+                                        <Button className={classes.button} varient="outlined" size="large" color="secondary" href={thread.permalink}>
+                                             <Typography className={classes.buttonText}>
+                                                  Click
+                                             </Typography>
+                                        </Button>
+                                   </CardActions>
+                              </Card>
+                         </Grid>
+                    )}
+               </Grid>
+          </Box>
      )
 }
 

@@ -1,17 +1,18 @@
 import styled from 'styled-components'
 
 const BannerBox = styled.div`
-     display: flex;
+     ${'' /* display: flex; */}
      width: 100vw;
      height: 75vh;
      justify-content: center;
+     ${'' /* position: absolute; */}
 `
 
 const Background = styled.img`
      width: 100vw;
      height: 75vh;
-     position: absolute;
      opacity: 0.85;
+     position: relative;
      ${'' /* margin-top: 100px; */}
 `
 
@@ -29,7 +30,6 @@ const SearchBox = styled.div`
      position: absolute;*/}
      heigth: 40px; 
      width: 70vw;
-     height: 40px;
      border-radius: 10px;
      display: flex;
      align-items: center;
