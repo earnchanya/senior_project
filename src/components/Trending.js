@@ -8,7 +8,6 @@ import usePassQuery from '../common/hooks/usePassQuery';
 
 function Trending() {
      const parseQuery = usePassQuery()
-
      const [data, setData] = useState({ arr: [{name: "Forest", thumbnail_active: ForestActive, thumbnail_inactive: ForestInActive, isActive: true}, 
                          {name: "Mountain", thumbnail_active: MountainActive, thumbnail_inactive: MountainInActive , isActive: false},
                          {name: "Sea", thumbnail_active: SeaActive, thumbnail_inactive: SeaInActive, isActive: false},
@@ -16,9 +15,7 @@ function Trending() {
      const onClick = (index) => {
           let tmp = [...data.arr]
           tmp[index].isActive = !tmp[index].isActive;
-          
           const filters = tmp.map((_, index) => index).filter(index => data.arr[index].isActive)
-          // console.log('click')
           parseQuery({ params: { filters }, targetUrl: '/' })
           setData({ arr: tmp })
      }

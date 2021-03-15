@@ -1,9 +1,8 @@
 import ForestBack from '../assets/photo/forest.jpg'
-import { Search } from './Icon'
-import { Box, Button, Typography, TextField, InputAdornment } from '@material-ui/core'
+import { SearchIcon } from './Icon'
+import { Box, Typography, TextField, InputAdornment } from '@material-ui/core'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
-import { CloudUpload } from '@material-ui/icons';
-
+import usePassQuery from '../common/hooks/usePassQuery';
 
 const useStyles = makeStyles((theme) => ({
      container: {
@@ -16,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
      },
      boxContainer: {
           position: "absolute",
+          width: "40%",
           top: "35%",
           left: "26%",
      },
@@ -54,9 +54,17 @@ const ValidationTextField = withStyles({
      },
    })(TextField);
 
+   
 function Banner()  {
      const classes = useStyles()
+     const parseQuery = usePassQuery()
 
+     const handleKeyDown = (event) => {
+     if (event.key === "Enter") {
+          const category = event.target.value
+          parseQuery({ params: {category}, targetUrl: '/results' })
+          }
+     };
      return (
           <Box className={classes.container}>
                <img className={classes.background} width="100px" alt="background" src={ForestBack}/>
@@ -66,7 +74,7 @@ function Banner()  {
                               Explore
                          </Typography>
                          <Typography variant="h5" component="p">
-                              The travel blog reviews from Blue Planet Pantip using your image!
+                              The travel blog reviews from Blue Planet Pantip!
                          </Typography>
                     </Box>
                     <Box className={classes.root}>
@@ -75,19 +83,20 @@ function Banner()  {
                               InputProps={{
                               startAdornment: (
                               <InputAdornment position="start">
-                                   <img className={classes.serachIcon} alt="search-icon" src={Search}/>
+                                   <img className={classes.serachIcon} alt="search-icon" src={SearchIcon}/>
                               </InputAdornment>
                               ),
                          }}
+                              onKeyDown={handleKeyDown}
                          />
-                         <Button
+                         {/* <Button
                               variant="contained"
                               color="default"
                               className={classes.button}
                               startIcon={<CloudUpload/>}
-                              >
+                              >s
                               Upload
-                         </Button>
+                         </Button> */}
                     </Box>
                </Box>
           </Box>

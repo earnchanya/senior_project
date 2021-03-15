@@ -13,13 +13,13 @@ export default function usePassQuery() {
 	const passQuery = useCallback(
 		({ params, targetUrl, withOldQuery = true }) => {
 			const newQuery = withOldQuery ? { ...query, ...params } : params
-
+			console.log(targetUrl)
 			const url = buildUrlWithParams(targetUrl || history.location.pathname, newQuery)
 			
 			history.push(url)
+			console.log(url)
 		},
 		[history, query],
 	)
-
 	return passQuery
 }

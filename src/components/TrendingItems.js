@@ -48,7 +48,7 @@ function TrendingItems () {
      const classes = useStyles()
 
      useEffect(() => {
-          const basePath = "http://localhost:8080"
+          const basePath = "http://localhost:8020"
           const path = `${ basePath }${ search || DEFAULT_SEARCH }`
 
           axios
@@ -56,7 +56,6 @@ function TrendingItems () {
           .then((res) => {
                if(!res.data?.threads) 
                     return
-               
                setThread(res.data.threads)
                // console.log(res.data.threads)
                // console.log(res.data)
@@ -98,7 +97,7 @@ function TrendingItems () {
                                    <CardActions>
                                         <Button className={classes.button} varient="outlined" size="large" color="secondary" href={thread.permalink}>
                                              <Typography className={classes.buttonText}>
-                                                  Click
+                                                  Read more
                                              </Typography>
                                         </Button>
                                    </CardActions>

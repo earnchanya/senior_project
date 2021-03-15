@@ -7,8 +7,8 @@ import SeaActive from '../assets/icon/sea_purple.svg'
 import SeaInActive from '../assets/icon/sea_white.svg'
 import WaterfallActive from '../assets/icon/waterfall_purple.svg'
 import WaterfallInActive from '../assets/icon/waterfall_white.svg'
-import Search from '../assets/icon/search.svg'
+import SearchIcon from '../assets/icon/search.svg'
 import Camera from '../assets/icon/camera.svg'
 
 export {Trend, ForestActive, ForestInActive, MountainActive,MountainInActive,
-     SeaActive, SeaInActive, WaterfallActive, WaterfallInActive, Search, Camera}
+     SeaActive, SeaInActive, WaterfallActive, WaterfallInActive, SearchIcon, Camera}

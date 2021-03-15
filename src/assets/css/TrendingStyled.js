@@ -25,7 +25,7 @@ const TrendTitle = styled.h1`
 const ButtonBox = styled.div`
      margin-left: 2vw;
      margin-top: 5px;
-     display: grid | inline-grid;     
+     ${'' /* display: grid | inline-grid;      */}
 `
 
 const FilterIcon = styled.img`
