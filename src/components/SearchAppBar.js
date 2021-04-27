@@ -62,7 +62,8 @@ export default function SearchAppBar() {
      if (event.key === "Enter") {
           const category = event.target.value
           console.log(category)
-          if (category !== "mountain" && category !== "forest" && category !== "sea") {
+          if (category !== "mountain" && category !== "forest" && category !== "sea" && category !== "waterfall" 
+               && category !== "Waterfall" && category !== "Sea" && category !== "Forest" && category !== "Mountain") {
                parseQuery({ params: {category}, targetUrl: '/NotFound' })
           }
           else {

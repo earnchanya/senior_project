@@ -20,7 +20,7 @@ function Trending() {
           setData({ arr: tmp })
      }
      
-     // console.log('filters')
+     console.log('filters')
      return (
                <TrendingBox>
                     <TitleBox>

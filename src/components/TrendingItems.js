@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy } from 'react'
 import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import { Box, Grid, Card, CardActionArea, CardActions, 
@@ -74,20 +74,13 @@ function TrendingItems () {
                                                   {thread.title}
                                              </Typography>
                                         </CardContent>
-                                        {/* <div className={classes.imageContainer}>
-                                             <img
-                                                  className={classes.media}
-                                                  src={thread.images[0]}
-                                                  alt="card=props"
-                                             />
-                                        </div> */}
                                         <SwipeableViews enableMouseEvents>
                                              { thread.images.map((image, index) => {
                                                   return (
                                                        <img
                                                             className={classes.media}
                                                             key={index}
-                                                            src={image}
+                                                            src={`https://aoyztzpfum.cloudimg.io/cdno/n/webp/${image}`}
                                                             alt="card-props"
                                                        />
                                                   )
